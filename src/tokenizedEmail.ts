@@ -5,14 +5,15 @@ const map = new Map<string, string>();
 
 export const buildEmailToken = (email: string) => {
     if (emailValidator(email) === false) {
-        throw new Error ("Invalid email");
+        throw new Error("Invalid email");
     }
-
+    // if this was actual code we'd have something more cryptographically secure than md5, say with a salt
     const hashedEmail = md5hasher(email);
-    map.set(email, hashedEmail);
+    // if this was actual code it'd be given a proper persistence layer
+    map.set(hashedEmail, email);
     return hashedEmail;
 };
 
-export const retrieveHash = (email: string) => {
-    return "yay";
+export const retrieveHash = (emailHash: string) => {
+    return map.get(emailHash);
 };
