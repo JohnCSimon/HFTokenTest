@@ -1,6 +1,4 @@
-// import { expect } from "chai";
 import chai, { expect } from "chai";
-// import { Request, Response } from "express";
 import sinonChai from "sinon-chai";
 import { mockReq, mockRes } from "sinon-express-mock";
 import { decodeEmail, encodeEmail } from "../routes/email";
@@ -9,7 +7,7 @@ chai.use(sinonChai);
 
 describe("Email routes", () => {
     describe("encodeEmail", () => {
-        it("should return 400 - Invalid email when given no email", () => {
+        it("should return 400 and Invalid email message when given no email", () => {
             const request = {
                 body: {
                     email: "bar"
@@ -23,7 +21,7 @@ describe("Email routes", () => {
             expect(res.send).to.be.calledWith("Invalid email");
         });
 
-        it("should return 200 - and a hash when given a valid email", () => {
+        it("should return 200 and a hash when given a valid email", () => {
             const request = {
                 body: {
                     email: "a@b.com"
@@ -40,7 +38,7 @@ describe("Email routes", () => {
     });
 
     describe("decodeEmail", () => {
-        it("should return 404 - email not found", () => {
+        it("should return 404 and email not found message when given an invalid email address", () => {
             const request = {
                 params: {
                     emailHash: "NOTFOUND"
@@ -55,7 +53,7 @@ describe("Email routes", () => {
             expect(res.send).to.be.calledWith("email not found");
         });
 
-        it("should return 200 - and an email when given a valid hash", () => {
+        it("should return 200 and an email when given a valid hash", () => {
             const request = {
                 params: {
                     emailHash: "357a20e8c56e69d6f9734d23ef9517e8"

@@ -1,8 +1,12 @@
 import bodyParser from "body-parser";
+import dotenv from "dotenv";
 import express from "express";
 import { decodeEmail, encodeEmail } from "./routes/email";
+
+dotenv.config();
+
 const app = express();
-const port = 8080;
+const port = process.env.SERVERPORT || 8080;
 
 app.use(bodyParser.json());
 
